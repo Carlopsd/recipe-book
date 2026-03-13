@@ -1,0 +1,25 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+export interface Recipe {
+  id: number;
+  name: string;
+  description: string;
+  ingredients: string[];
+  steps: string[];
+  category: string;
+  difficulty: string;
+  prepTime: number;
+  imageUrl: string;
+}
+
+export const recipesApi = createApi({
+  reducerPath: "recipesApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
+  endpoints: (builder) => ({
+    getRecipes: builder.query<Recipe[], void>({
+      query: () => "/recipes",
+    }),
+  }),
+});
+
+export const { useGetRecipesQuery } = recipesApi;
