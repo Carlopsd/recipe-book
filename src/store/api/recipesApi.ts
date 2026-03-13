@@ -12,6 +12,11 @@ export interface Recipe {
   imageUrl: string;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+}
+
 export const recipesApi = createApi({
   reducerPath: "recipesApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
@@ -19,7 +24,10 @@ export const recipesApi = createApi({
     getRecipes: builder.query<Recipe[], void>({
       query: () => "/recipes",
     }),
+    getCategories: builder.query<Category[], void>({
+      query: () => "/categories",
+    }),
   }),
 });
 
-export const { useGetRecipesQuery } = recipesApi;
+export const { useGetRecipesQuery, useGetCategoriesQuery } = recipesApi;
